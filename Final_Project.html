@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Final Project — Two-Story Custom Residence</title>
+<style>
+  :root{
+    --bg:#0a0a0a;--bg-card:#131313;--bg-card-2:#171012;--border:#2a2a2a;
+    --text:#e8e6e2;--text-dim:#9a9a9a;--blue:#8ab4d8;--gold:#c9a668;
+    --red:#7a2430;--red-bright:#b23a4a;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{background:var(--bg);color:var(--text);font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;line-height:1.6;}
+  .page{max-width:1000px;margin:0 auto;padding-bottom:4rem;}
+  hr.divider{border:0;border-top:1px solid var(--red);margin:0;}
+  hr.divider.thin{border-top:1px solid var(--border);}
+  .topbar{display:flex;justify-content:space-between;align-items:center;padding:1.3rem 2rem;font-size:0.8rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--blue);}
+  .topbar .course{color:var(--text-dim);}
+  .hero{padding:3rem 2rem 1.5rem;}
+  .kicker{text-transform:uppercase;letter-spacing:0.18em;font-size:0.78rem;color:var(--red-bright);margin-bottom:0.8rem;font-weight:600;}
+  .hero h1{font-family:Georgia,'Times New Roman',serif;font-weight:400;font-size:clamp(1.9rem,4vw,2.7rem);line-height:1.25;margin:0 0 1.2rem;max-width:820px;color:#f5f3ef;}
+  .hero h1 em{color:var(--gold);font-style:italic;}
+  .hero .lede{color:var(--gold);font-size:1.02rem;max-width:720px;margin:0 0 1rem;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:0.6rem;margin-top:1.4rem;}
+  .meta-pill{border:1px solid var(--border);color:var(--text-dim);font-size:0.75rem;letter-spacing:0.05em;text-transform:uppercase;padding:0.35rem 0.75rem;}
+  .meta-pill.highlight{border-color:var(--red-bright);color:#f5f3ef;}
+  .toc{display:flex;flex-wrap:wrap;gap:0.5rem;padding:1.5rem 2rem;}
+  .toc a{color:var(--blue);text-decoration:none;font-size:0.78rem;letter-spacing:0.06em;text-transform:uppercase;border:1px solid var(--border);padding:0.4rem 0.8rem;}
+  .toc a:hover{border-color:var(--blue);}
+  .section-label{text-transform:uppercase;letter-spacing:0.16em;color:var(--blue);font-size:0.85rem;margin:3.2rem 2rem 0.4rem;font-weight:600;}
+  .section-sub{color:var(--text-dim);margin:0 2rem 1.6rem;max-width:760px;font-size:0.95rem;}
+  .req-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.1rem;padding:0 2rem;}
+  .card{background:var(--bg-card);border:1px solid var(--border);padding:1.3rem 1.4rem;}
+  .card h3{text-transform:uppercase;letter-spacing:0.07em;color:var(--red-bright);font-size:0.92rem;margin:0 0 0.6rem;}
+  .card ul{margin:0;padding-left:1.1rem;}
+  .card li{margin-bottom:0.45rem;font-size:0.92rem;}
+  .card li:last-child{margin-bottom:0;}
+  .spec-block{margin:0 2rem 1.6rem;background:var(--bg-card);border:1px solid var(--border);padding:1.4rem 1.6rem;}
+  .spec-block h3{text-transform:uppercase;letter-spacing:0.07em;color:var(--gold);font-size:0.95rem;margin:0 0 0.8rem;font-style:italic;}
+  .spec-block ul{margin:0;padding-left:1.2rem;}
+  .spec-block li{margin-bottom:0.5rem;}
+  .spec-block li:last-child{margin-bottom:0;}
+  .spec-block b{color:#f5f3ef;}
+  table.data-table{width:calc(100% - 4rem);margin:0 2rem 1.8rem;border-collapse:collapse;font-size:0.88rem;}
+  table.data-table th,table.data-table td{border:1px solid var(--border);padding:0.6rem 0.8rem;text-align:left;}
+  table.data-table th{background:#171717;color:var(--blue);text-transform:uppercase;letter-spacing:0.05em;font-size:0.75rem;}
+  table.data-table td{color:var(--text);}
+  .table-wrap{overflow-x:auto;}
+  .steps{margin:0 2rem 1.8rem;padding:0;list-style:none;counter-reset:step;}
+  .steps li{counter-increment:step;position:relative;padding:0.7rem 0 0.7rem 2.6rem;border-bottom:1px solid var(--border);font-size:0.95rem;}
+  .steps li::before{content:counter(step);position:absolute;left:0;top:0.65rem;color:var(--red-bright);border:1px solid var(--red-bright);width:1.6rem;height:1.6rem;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.8rem;}
+  .rubric-criterion{margin:0 2rem 2.2rem;}
+  .rubric-criterion h3{color:#f5f3ef;font-size:1.02rem;margin:0 0 0.9rem;font-weight:600;border-top:1px solid var(--red);padding-top:0.9rem;}
+  .tier-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;}
+  .tier{background:var(--bg-card);border:1px solid var(--border);padding:1rem 1.1rem;}
+  .tier.excellent{border-top:3px solid var(--blue);}
+  .tier.proficient{border-top:3px solid var(--gold);}
+  .tier.developing{border-top:3px solid var(--red-bright);}
+  .tier .tier-name{text-transform:uppercase;letter-spacing:0.08em;font-size:0.75rem;margin-bottom:0.2rem;}
+  .tier.excellent .tier-name{color:var(--blue);}
+  .tier.proficient .tier-name{color:var(--gold);}
+  .tier.developing .tier-name{color:var(--red-bright);}
+  .tier .tier-pts{font-size:0.8rem;color:var(--text-dim);margin-bottom:0.5rem;}
+  .tier p{margin:0;font-size:0.86rem;color:var(--text);}
+  .checklist{list-style:none;margin:0 2rem 1rem;padding:0;}
+  .checklist li{border-bottom:1px solid var(--border);padding:0.7rem 0;display:flex;align-items:flex-start;gap:0.7rem;font-size:0.94rem;}
+  .checklist input[type=checkbox]{margin-top:0.2rem;width:1.05rem;height:1.05rem;accent-color:var(--red-bright);flex-shrink:0;}
+  .checklist label.done{color:var(--text-dim);text-decoration:line-through;}
+  .progress-wrap{margin:0 2rem 2rem;}
+  .progress-label{font-size:0.8rem;color:var(--text-dim);margin-bottom:0.4rem;letter-spacing:0.04em;text-transform:uppercase;}
+  .progress-bar{height:6px;background:#1c1c1c;border:1px solid var(--border);overflow:hidden;}
+  .progress-fill{height:100%;background:linear-gradient(90deg,var(--red-bright),var(--gold));width:0%;transition:width 0.3s ease;}
+  .btn{background:#3a1218;border:1px solid var(--red-bright);color:#f5f3ef;text-transform:uppercase;letter-spacing:0.1em;padding:0.85rem 1.8rem;text-decoration:none;font-size:0.82rem;text-align:center;}
+  .btn:hover{background:var(--red-bright);}
+  footer{padding:2rem;text-align:center;color:var(--text-dim);font-size:0.78rem;letter-spacing:0.05em;}
+  code{background:#1c1c1c;padding:0.1em 0.4em;border-radius:3px;color:var(--gold);font-size:0.9em;}
+  .note{margin:0 2rem 1.6rem;padding:1rem 1.2rem;border-left:3px solid var(--gold);background:var(--bg-card);font-size:0.9rem;color:var(--text-dim);font-style:italic;}
+  .warn{margin:0 2rem 1.6rem;padding:1rem 1.2rem;border-left:3px solid var(--red-bright);background:var(--bg-card);font-size:0.9rem;color:var(--text);}
+  .warn b{color:var(--red-bright);}
+  @media(max-width:640px){.tier-grid{grid-template-columns:1fr;}.topbar{flex-direction:column;align-items:flex-start;gap:0.3rem;}}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="topbar">
+    <span>CTD 330</span>
+    <span class="course">AutoCAD for Interior Design — The University of Alabama</span>
+  </div>
+  <hr class="divider">
+
+  <section class="hero">
+    <div class="kicker">Final Project · Capstone Assignment</div>
+    <h1>Design and fully document an original <em>two-story residence</em>, from floor plans to a finished construction sheet.</h1>
+    <p class="lede">For your final project, you will draw — using the course AutoCAD template — a two-story, 2,000–3,000 Sq. Ft. house containing a defined residential program. You are responsible for the design: you have complete creative freedom in how the house is laid out, massed, and detailed, provided the required rooms are present and the design is entirely your own original work.</p>
+    <div class="meta-row">
+      <span class="meta-pill highlight">500 Points</span>
+      <span class="meta-pill">2,000–3,000 SF</span>
+      <span class="meta-pill">Two-Story Residence</span>
+      <span class="meta-pill">100% Original Design</span>
+    </div>
+  </section>
+  <hr class="divider thin">
+
+  <h2 class="section-label" id="before">Before You Begin</h2>
+  <div class="spec-block">
+    <p style="margin:0 0 0.9rem;">This capstone project draws on everything covered across Assignments 1–8 — polylines and closed geometry, wall construction and hatching, nested blocks, dimensioning and annotation, sheet layouts, and plotting with a CTB file. Review any of those Panopto tutorials you need a refresher on before starting.</p>
+    <a class="btn" style="display:inline-block;" href="https://alabama.hosted.panopto.com/Panopto/Pages/Sessions/List.aspx?folderID=1379a196-d170-4acc-8ca3-b4a600e22d35" target="_blank" rel="noopener">Open CTD 330 Video Library ↗</a>
+  </div>
+
+  <nav class="toc">
+    <a href="#before">Before You Begin</a>
+    <a href="#program">Room Program</a>
+    <a href="#constraints">Design Constraints</a>
+    <a href="#deliverables">Deliverables</a>
+    <a href="#sheet">Sheet Size Guidance</a>
+    <a href="#checklist">Checklist</a>
+    <a href="#rubric">Rubric</a>
+  </nav>
+
+  <h2 class="section-label" id="program">Required Room Program</h2>
+  <p class="section-sub">Every space below must appear somewhere in your two-story plan. Beyond that, adjacency, circulation, room shapes, and overall massing are entirely up to you.</p>
+  <div class="req-grid">
+    <div class="card">
+      <h3>Sleeping &amp; Bathing</h3>
+      <ul>
+        <li>2 Bedrooms</li>
+        <li>1½ Bathrooms</li>
+        <li>Master Bedroom with <b>Walk-in Closet</b></li>
+        <li>Master Bathroom</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Living &amp; Dining</h3>
+      <ul>
+        <li>Open Kitchen</li>
+        <li>Pantry</li>
+        <li>Dining Room</li>
+        <li>Living Room</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Service &amp; Storage</h3>
+      <ul>
+        <li>Laundry Room</li>
+        <li>Coat Closet</li>
+        <li>Linen Closet</li>
+        <li>Mechanical Closet</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2 class="section-label" id="constraints">Design Constraints</h2>
+  <div class="req-grid">
+    <div class="card">
+      <h3>Building Envelope</h3>
+      <ul>
+        <li>Two full stories, connected internally by a stair</li>
+        <li>Total heated area between <b>2,000 and 3,000 Sq. Ft.</b> across both floors</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Template &amp; Standards</h3>
+      <ul>
+        <li>Drawn using the course AutoCAD template</li>
+        <li>Apply layer, dimensioning, and drafting standards established in Assignments 1–7</li>
+      </ul>
+    </div>
+  </div>
+  <div class="warn"><b>Original design required.</b> The layout, room shapes, and massing must be your own creation. Copying, tracing, or closely replicating an existing house — whether from a plan book, a real property, or another student's work — is prohibited.</div>
+
+  <h2 class="section-label" id="deliverables">Required Deliverables</h2>
+  <div class="req-grid">
+    <div class="card">
+      <h3>1 · AutoCAD File</h3>
+      <ul>
+        <li>First Floor Plan</li>
+        <li>Second Floor Plan</li>
+        <li>Section/Elevation cutting through the stair connecting both floors</li>
+        <li>Named <code>LastName_FirstName_FinalProject.dwg</code></li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>2 · PDF Printout</h3>
+      <ul>
+        <li>Plotted at <b>1/4" = 1'-0"</b> scale</li>
+        <li>A single Layout/paper format containing all three drawings: First Floor, Second Floor, and Section/Elevation</li>
+        <li>Plotted using the provided <b>CTB file</b> and the course AutoCAD template</li>
+        <li>Named <code>LastName_FirstName_FinalProject.pdf</code></li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>3 · Physical Printout</h3>
+      <ul>
+        <li>Printed directly from the exported PDF</li>
+        <li>Actual Size (100% scale) — not "Fit to Printable Area"</li>
+        <li>Hand in directly to the instructor</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2 class="section-label" id="sheet">Sheet Size Guidance</h2>
+  <p class="section-sub">You must assess the size and proportions of your own drawings and decide which paper format is appropriate. There is no single correct answer — the right sheet size depends on your house's footprint.</p>
+  <div class="req-grid">
+    <div class="card">
+      <h3>Too Small</h3>
+      <ul><li>A format too small for your plotted extents forces crammed-in, overlapping, or illegible drawings and dimensions</li></ul>
+    </div>
+    <div class="card">
+      <h3>Too Large</h3>
+      <ul><li>An oversized format leaves a disproportionate amount of empty space around the drawings, weakening the presentation</li></ul>
+    </div>
+    <div class="card">
+      <h3>Just Right</h3>
+      <ul><li>All three drawings — First Floor, Second Floor, Section/Elevation — sit on one sheet at 1/4" scale with balanced margins and no crowding</li></ul>
+    </div>
+  </div>
+  <div class="table-wrap">
+  <table class="data-table">
+    <thead><tr><th>Common Sheet Size</th><th>Typical Fit</th></tr></thead>
+    <tbody>
+      <tr><td>11″ × 17″ (ANSI B)</td><td>Very compact house footprints only — rarely enough for two plans plus a section at 1/4"</td></tr>
+      <tr><td>18″ × 24″ (ARCH C)</td><td>Typical fit for a modest 2,000–2,500 SF footprint across two plans plus a section</td></tr>
+      <tr><td>24″ × 36″ (ARCH D)</td><td>Recommended default for most two-story houses in the 2,000–3,000 SF range</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="note">Lay out your three drawings at 1/4" scale in Model Space or on your viewport first, then choose the smallest sheet size that fits all three without crowding — that is your correct format.</div>
+
+  <h2 class="section-label" id="checklist">Submission Checklist</h2>
+  <ul class="checklist" data-assignment="FINAL">
+    <li><input type="checkbox" id="fp-1"><label for="fp-1">AutoCAD file includes First Floor Plan, Second Floor Plan, and a Section/Elevation cutting through the stair</label></li>
+    <li><input type="checkbox" id="fp-2"><label for="fp-2">House is two stories, 2,000–3,000 SF total, and contains every room in the required program</label></li>
+    <li><input type="checkbox" id="fp-3"><label for="fp-3">Design is an entirely original creation — not copied or traced from an existing house</label></li>
+    <li><input type="checkbox" id="fp-4"><label for="fp-4">PDF is plotted at 1/4" = 1'-0" scale</label></li>
+    <li><input type="checkbox" id="fp-5"><label for="fp-5">All three drawings appear on a single, appropriately sized Layout/paper format — no crowding, no excessive empty space</label></li>
+    <li><input type="checkbox" id="fp-6"><label for="fp-6">Provided CTB file and course AutoCAD template were used for plotting</label></li>
+    <li><input type="checkbox" id="fp-7"><label for="fp-7">Physical printout submitted at true scale (100%, not "Fit to Printable Area")</label></li>
+    <li><input type="checkbox" id="fp-8"><label for="fp-8">Files named <code>LastName_FirstName_FinalProject.dwg</code> and <code>.pdf</code></label></li>
+  </ul>
+  <div class="progress-wrap">
+    <div class="progress-label"><span class="progress-count">0 / 8</span> complete</div>
+    <div class="progress-bar"><div class="progress-fill"></div></div>
+  </div>
+
+  <h2 class="section-label" id="rubric">Evaluation Rubric</h2>
+  <p class="section-sub">Total possible score: <b style="color:#f5f3ef;">500 points</b> across 4 criteria.</p>
+
+  <div class="rubric-criterion">
+    <h3>1. Architectural Program &amp; Design Quality <span style="color:var(--text-dim);font-weight:400;font-size:0.85rem;">(150 pts)</span></h3>
+    <div class="tier-grid">
+      <div class="tier excellent"><div class="tier-name">Excellent</div><div class="tier-pts">135–150 pts</div><p>The design fully satisfies the required program with logical adjacencies, efficient circulation, and a cohesive, original spatial concept. Total area falls within 2,000–3,000 SF.</p></div>
+      <div class="tier proficient"><div class="tier-name">Proficient</div><div class="tier-pts">113–134 pts</div><p>All required rooms are present and the design is original, but adjacencies or circulation show minor inefficiencies, or total square footage sits slightly outside the target range.</p></div>
+      <div class="tier developing"><div class="tier-name">Developing</div><div class="tier-pts">0–112 pts</div><p>Required rooms are missing, the design closely resembles an existing or reference house, or the square footage falls well outside the 2,000–3,000 SF range.</p></div>
+    </div>
+  </div>
+
+  <div class="rubric-criterion">
+    <h3>2. Technical Drafting Precision <span style="color:var(--text-dim);font-weight:400;font-size:0.85rem;">(150 pts)</span></h3>
+    <div class="tier-grid">
+      <div class="tier excellent"><div class="tier-name">Excellent</div><div class="tier-pts">135–150 pts</div><p>Both floor plans are drawn with precise, closed polyline wall geometry, and doors/windows correctly sized and inserted on their proper layers using the course template.</p></div>
+      <div class="tier proficient"><div class="tier-name">Proficient</div><div class="tier-pts">113–134 pts</div><p>Floor plans are complete and functional but contain minor precision issues, or minor layer misassignments.</p></div>
+      <div class="tier developing"><div class="tier-name">Developing</div><div class="tier-pts">0–112 pts</div><p>Significant dimensional errors, unclosed or unjoined polylines, missing doors or windows, or geometry drawn on incorrect layers.</p></div>
+    </div>
+  </div>
+
+  <div class="rubric-criterion">
+    <h3>3. Section/Elevation &amp; Vertical Coordination <span style="color:var(--text-dim);font-weight:400;font-size:0.85rem;">(100 pts)</span></h3>
+    <div class="tier-grid">
+      <div class="tier excellent"><div class="tier-name">Excellent</div><div class="tier-pts">90–100 pts</div><p>The section/elevation accurately cuts through the stair connecting both floors, correctly reflects floor-to-floor heights, and both plans align vertically. Walls, stair location, and structure are consistent between floors.</p></div>
+      <div class="tier proficient"><div class="tier-name">Proficient</div><div class="tier-pts">75–89 pts</div><p>Section is present and cuts through the stair, but shows minor inconsistencies in floor height or vertical alignment with the plans.</p></div>
+      <div class="tier developing"><div class="tier-name">Developing</div><div class="tier-pts">0–74 pts</div><p>Section/elevation is missing, does not cut through the stair, or the two floors do not align vertically with one another.</p></div>
+    </div>
+  </div>
+
+  <div class="rubric-criterion">
+    <h3>4. Sheet Layout, Plotting &amp; Presentation <span style="color:var(--text-dim);font-weight:400;font-size:0.85rem;">(100 pts)</span></h3>
+    <div class="tier-grid">
+      <div class="tier excellent"><div class="tier-name">Excellent</div><div class="tier-pts">90–100 pts</div><p>All three drawings — First Floor, Second Floor, Section/Elevation — are composed on a single, appropriately sized sheet at 1/4"=1'-0" with no crowding or excessive empty space. The provided CTB file and course template are applied correctly. PDF and physical printout are cleanly plotted at true scale.</p></div>
+      <div class="tier proficient"><div class="tier-name">Proficient</div><div class="tier-pts">75–89 pts</div><p>All three drawings are on one sheet at the correct scale, but paper size selection is slightly mismatched — minor crowding or excess white space — or minor CTB/line weight inconsistencies exist.</p></div>
+      <div class="tier developing"><div class="tier-name">Developing</div><div class="tier-pts">0–74 pts</div><p>Drawings are split across multiple sheets, plotted at the wrong scale, paper size is clearly inadequate (crammed or disproportionately empty), or the CTB/template were not used.</p></div>
+    </div>
+  </div>
+
+  <footer>CTD 330 · AutoCAD for Interior Design · The University of Alabama</footer>
+</div>
+
+<script>
+document.querySelectorAll('.checklist').forEach(function(list){
+  var key = 'ctd330_' + (list.dataset.assignment || 'A00');
+  var boxes = list.querySelectorAll('input[type=checkbox]');
+  var saved = {};
+  try{ saved = JSON.parse(localStorage.getItem(key) || '{}'); }catch(e){}
+  function update(){
+    var state = {}; var count = 0;
+    boxes.forEach(function(cb){
+      state[cb.id] = cb.checked;
+      if(cb.checked) count++;
+      var label = document.querySelector('label[for="'+cb.id+'"]');
+      if(label) label.classList.toggle('done', cb.checked);
+    });
+    localStorage.setItem(key, JSON.stringify(state));
+    var wrap = list.nextElementSibling;
+    if(wrap && wrap.classList.contains('progress-wrap')){
+      wrap.querySelector('.progress-count').textContent = count + ' / ' + boxes.length;
+      wrap.querySelector('.progress-fill').style.width = (boxes.length ? (count/boxes.length*100) : 0) + '%';
+    }
+  }
+  boxes.forEach(function(cb){
+    if(saved[cb.id]) cb.checked = true;
+    cb.addEventListener('change', update);
+  });
+  update();
+});
+</script>
+</body>
+</html>
