@@ -59,6 +59,19 @@
   .total-bar .value{font-family:Georgia,serif;font-size:1.3rem;color:var(--gold);}
   footer{padding:2rem;text-align:center;color:var(--text-dim);font-size:0.78rem;letter-spacing:0.05em;}
   code{background:#1c1c1c;padding:0.1em 0.4em;border-radius:3px;color:var(--gold);font-size:0.9em;}
+  .spec-block{margin:0 2rem 1.6rem;background:var(--bg-card);border:1px solid var(--border);padding:1.4rem 1.6rem;}
+  .spec-block h3{text-transform:uppercase;letter-spacing:0.07em;color:var(--gold);font-size:0.95rem;margin:0 0 0.8rem;font-style:italic;}
+  .spec-block ul{margin:0;padding-left:1.2rem;}
+  .spec-block li{margin-bottom:0.5rem;}
+  .spec-block li:last-child{margin-bottom:0;}
+  .spec-block b{color:#f5f3ef;}
+  table.data-table{width:calc(100% - 4rem);margin:0 2rem 1.8rem;border-collapse:collapse;font-size:0.88rem;}
+  table.data-table th,table.data-table td{border:1px solid var(--border);padding:0.6rem 0.8rem;text-align:left;}
+  table.data-table th{background:#171717;color:var(--blue);text-transform:uppercase;letter-spacing:0.05em;font-size:0.75rem;}
+  table.data-table td{color:var(--text);}
+  .table-wrap{overflow-x:auto;}
+  .btn{background:#3a1218;border:1px solid var(--red-bright);color:#f5f3ef;text-transform:uppercase;letter-spacing:0.1em;padding:0.85rem 1.8rem;text-decoration:none;font-size:0.82rem;text-align:center;display:inline-block;}
+  .btn:hover{background:var(--red-bright);}
   @media(max-width:640px){.topbar{flex-direction:column;align-items:flex-start;gap:0.3rem;}}
 </style>
 </head>
@@ -87,6 +100,7 @@
     <a href="#grading">Grading</a>
     <a href="#outcomes">Student Learning Outcomes</a>
     <a href="#objectives">Course Objectives</a>
+    <a href="#methodology">Assignment Methodology</a>
     <a href="#assignments">Assignments</a>
   </nav>
 
@@ -143,6 +157,29 @@
     <li><b>Annotating for Communication</b> — Making drawings speak to others through scaled dimensions, callouts, and notes that stay legible and coordinated across views.</li>
     <li><b>Collaborating Through Referenced Files</b> — Develop a professional workflow for sharing clean, aligned base files, and learn the file-management habits that keep team-based projects stable.</li>
   </ol>
+
+  <h2 class="section-label" id="methodology">Assignment Methodology</h2>
+  <p class="section-sub">Students are required to display autonomy by completing the corresponding tutorial for every assignment independently and as homework, before beginning that assignment's studio work.</p>
+  <div class="spec-block">
+    <h3>Panopto Tutorial Library</h3>
+    <p style="margin:0 0 0.9rem;font-size:0.9rem;color:var(--text);">Tutorials are numbered sequentially and grouped by the assignment they prepare you for.</p>
+    <a class="btn" href="https://alabama.hosted.panopto.com/Panopto/Pages/Sessions/List.aspx?folderID=1379a196-d170-4acc-8ca3-b4a600e22d35" target="_blank" rel="noopener">Open CTD 330 Video Library ↗</a>
+  </div>
+  <div class="table-wrap">
+  <table class="data-table">
+    <thead><tr><th>Assignment</th><th>Required Tutorials</th></tr></thead>
+    <tbody>
+      <tr><td>Assignment 1</td><td>001 – 015T</td></tr>
+      <tr><td>Assignment 2</td><td>016 – 032T</td></tr>
+      <tr><td>Assignment 3</td><td>033 – 045T</td></tr>
+      <tr><td>Assignment 4</td><td>046 – 051</td></tr>
+      <tr><td>Assignment 5</td><td>052 – 054</td></tr>
+      <tr><td>Assignment 6</td><td>055 – 056</td></tr>
+      <tr><td>Assignment 7</td><td>057 – 064</td></tr>
+      <tr><td>Assignment 8</td><td>065 – 074</td></tr>
+    </tbody>
+  </table>
+  </div>
 
   <h2 class="section-label" id="assignments">Assignments</h2>
   <p class="section-sub">Open any guide below for its full requirements, submission checklist, and rubric.</p>
